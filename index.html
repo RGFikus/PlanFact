@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Родион Горлович&mdash;Тестовое задание</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+ <!--    <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+
+  </head>
+
+  <body>
+
+    <script src="assets/js/tree.js"></script>
+    <div id="multi-derevo">
+      <h4><a href="#">Учётные статьи</a></h4>
+      <ul><!-- 1 уровень -->
+       <li><span><a href="#1">1. ДОХОДЫ</a></span>
+         <ul><!-- 2 уровень -->
+          <li><span><a href="#11">1.1. Ветка</a></span>
+            <ul><!-- 3 уровень -->
+             <li><span><a href="#111">1.1.1. Листик</a></span></li>
+             <li><span><a href="#112">1.1.2. Цветок </a></span></li>
+            </ul>
+          </li>
+         </ul>
+       </li>
+       <!-- 1 уровень -->
+       <li><span><a href="#2">2. РАСХОДЫ</a></span></li>
+       <li><span><a href="#3">3. АКТИВЫ</a></span></li>
+       <li><span><a href="#4">4. ОБЯЗАТЕЛЬСТВА</a></span></li>
+       <li><span><a href="#5" title="Послледняя ветка">5. КАПИТАЛ</a></span>
+         <ul><!-- 2 уровень -->
+          <li><span><a href="#1">5.1. Ветка</a></span></li>
+          <li><span><a href="#1">5.2. Ветка</a></span>
+            <ul><!-- 3 уровень -->
+             <li><span><a href="#1111">5.2.1.1 Лепесток</a></span></li>
+             <li><span><a href="#1112">5.2.1.2 Лепесток</a></span></li>
+            </ul>
+          </li>
+         </ul>
+       </li>
+      </ul>
+    </div>
+    <!-- /multi-derevo -->
+
+    <button type="load" id="load">Загрузить статьи</button>
+    <div class="container">
+      <div style="text-align: center;">
+        <a href="#openModal">Создать статью</a>
+      </div>
+      <div id="openModal" class="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Создание статьи</h3>
+              <a href="#close" title="Close" class="close">×</a>
+            </div>
+            <div class="modal-body">
+              <fieldset>
+                <legend>Контактная информация</legend>
+                  <label for="title">Название статьи <em>*</em></label>
+                  <input id="title"><br>
+                  <label for="parentOperationCategoryId">Относится к </label>
+                  <input type="radio" name="parent" id="one" > ДОХОДЫ  
+                  <input type="radio" name="parent" id="two" > РАСХОДЫ
+                  <input type="radio" name="parent" id="three" > АКТИВЫ
+                  <input type="radio" name="parent" id="four" > ОБЯЗАТЕЛЬСТВА
+                  <input type="radio" name="parent" id="five" > КАПИТАЛ
+                  <br>
+                  <button type="submit" id="submit">Создать статью</button>
+
+                    <script>
+                      document.querySelector("#submit").onclick = function(){
+
+                        let chbox;
+                        var title =$('#title').val();
+                        var operationCategoryType ;
+                        var parentOperationCategoryId ;
+                        var activityType ;
+
+                        chbox=document.getElementById('one');
+                          if (chbox.checked) {
+                           
+                            parentOperationCategoryId = 4433565;
+                            operationCategoryType = "Income";
+                            activityType = "Operating";
+                          }
+                          chbox=document.getElementById('two');
+                          if (chbox.checked) {
+                            parentOperationCategoryId = 4433572;
+                            operationCategoryType = "Outcome";
+                            activityType = "Operating";
+                          }
+                          chbox=document.getElementById('three');
+                          if (chbox.checked) {
+                            operationCategoryType = "Assets";
+                            activityType = 0;
+                            parentOperationCategoryId = 4433525;
+                          }
+                          chbox=document.getElementById('four');
+                          if (chbox.checked) {
+                            parentOperationCategoryId = 4433548;
+                            operationCategoryType = "Liabilities";
+                            activityType = 0;
+                          }
+                          chbox=document.getElementById('five');
+                          if (chbox.checked) {
+                            parentOperationCategoryId = 4433560;
+                            operationCategoryType = "Capital";
+                            activityType = "Finance";
+                          }
+                            
+                        
+                        $.ajax({
+                           
+                           method: "POST",
+                           dataType : 'json',
+                           url: "https://api.planfact.io/api/v1/operationcategories",  
+                           data: { "title": title, "operationCategoryType": operationCategoryType, "activityType": activityType, "parentOperationCategoryId": parentOperationCategoryId },   
+                           headers: {
+                            "Accept":" application/json",
+                            "X-ApiKey": 'SpBudXW_jT7rN6wGTnGBf9vEpFcBlNoDImfl1yUvUhzn0VA3Ye9wa8GamF5jp9DAOOJDzzHwus8wHIR7wBL9HkC0TDQNxSyXKmcLkONvzKd5Lj8HuV4R33bn4Kj4SUCB5xlo-9WuJSOWzKwDYRdKlZSU1Vn_h5lVmZoY7wZKu5EdvsaKTrXe5L0AjFN1ZnND_ksPrlG_TM2IeaLR61o0EfvYkUy0oTYdFEI2B4PA-RQS6fO8cUmW8VeW5D5Y9PyKtfUSHBjXE4dYlbwjhDfNNXPOxsaVhFUwxyfh5QyW6IBTctA_db1LByuO9txnnXUv9gG9ofXz5A-AR2ogCfuWrZbrV1YzSo7rP6B_QgNPaqvxFVxqdh4c_nhYz6u0NiOVkf4przmZxTRQrOSCtFnFNlRYJ0QFZxOCa7RjvfVb-TkinBXjJab36eFfDrkwe_NJ51GQq5GsCDGa5aW2QIXzCvHxa2vhjpkfhq_vBgnEX-YWKcc-7OfmCDhdxmKMfu6SdWPd7Q'
+                                    }})
+                      .success(function( msg ) {
+                      $('#errs').html('');
+                      console.log(msg)
+                      });
+                      alert("Статья создана");
+                      }
+
+
+                    
+
+                    </script>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+
+
+
+  </body>

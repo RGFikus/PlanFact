@@ -1,0 +1,218 @@
+/* свойства для блока, содержащего контент модального окна */ 
+.modal-content {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+}
+@media (min-width: 768px) {
+  .modal-content {
+      -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+      box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  }
+}
+/* свойства для заголовка модального окна */
+.modal-header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #eceeef;
+}
+.modal-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+/* свойства для кнопки "Закрыть" */
+.close {
+    float: right;
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    text-decoration: none;
+}
+/* свойства для кнопки "Закрыть" при нахождении её в фокусе или наведении */
+.close:focus, .close:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: .75;
+}
+/* свойства для блока, содержащего основное содержимое окна */
+.modal-body {
+  position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 5px;
+    overflow: auto;
+}
+
+
+
+/* общий стиль */
+body {font-family: Arial, Tahoma, sans-serif; margin: 2em; font-size: 62.5%;}
+p {
+ font-size: 1.2em;
+}
+a {
+ color: #0066cc;
+ text-decoration: none;
+ outline: none;
+}
+/*a:link {
+ color: #0066cc; 
+}
+a:visited {color: #00cc63; }*/ 
+a:hover {
+ text-decoration: underline;
+}
+a:active, a:focus {
+ color: #666;
+ background-color: #f4f4f4;
+}
+a.current {
+ color: black;
+ font-weight: bold;
+ background-color: #f4f4f4;
+}
+
+/* Дерево многоуровневое
+-------------------------------- */
+#multi-derevo {
+ width: 220px; /* блок под дерево */
+ border: solid; /* границы блока */
+ border-color: silver gray gray silver;
+ border-width: 2px;
+ padding: 0 0 1em 0; /* нижний отступ */
+ font-size: 1.3em;
+}
+ span { /* обертка пункта */
+   text-decoration: none;
+   display: block; /* растянем до правого края блока */
+   margin: 0 0 0 1.2em;     
+   background-color: transparent;
+   border: solid silver; /* цвет линий */ 
+   border-width: 0 0 1px 1px; /* границы: низ и лево */
+ }
+  span a {/* тест элемента дерева */
+    display: block;
+    position: relative;
+    top: .95em; /* смещаем узел на середину линии */
+    background-color: #fff; /* закраска в цвет фона обязательна иначе будет видно линию */
+    margin: 0 0 .2em .7em; /* делаем промежуток между узлами, отодвигаем левее  */
+    padding: 0 0.3em; /* небольшой отступ от линии */
+   }
+  h4 {/* заголовок дерева */
+   font-size: 1em;
+   font-weight: bold;
+   margin: 0;
+   padding: 0 .25em;
+   border-bottom: 1px solid silver;
+  }
+ h4 a {
+   display: block;
+ }
+ ul, li {
+   list-style-image:none;
+   list-style-position:outside;
+   list-style-type:none;
+   margin:0;
+   padding:0;
+ }
+   ul li {
+    line-height: 1.2em;
+   }
+    ul li ul {
+      display: none; /* узлы свернуты */
+    }
+      ul li ul li {
+       margin: 0 0 0 1.2em;
+       border-left: 1px solid silver; /* цвет вертикальной линии между узлами */
+      }
+      li.last {/* последний узел, соединительную линию к след. узлу убираем */
+       border: none; 
+      }
+ .marker { /* маркер раскрытия списка в закрытом состоянии */
+   border-color: transparent transparent transparent gray;
+   border-style: solid;
+   border-width: .25em 0 .25em .5em; 
+   margin: .35em .25em 0 0;
+   float: left;
+   width: 0px;
+   height: 0px;
+   line-height: 0px;
+ }
+ .marker.open {/* маркер раскрытия списка в открытом состоянии */
+   border-color: gray transparent transparent transparent;
+   border-width: .5em .25em 0 .25em; 
+ }
+/* IE 6 Fixup */
+* html #multi-derevo * { height: 1%;}
+* html .marker { border-style: dotted dotted dotted solid; }
+* html .marker.open { border-style: solid dotted dotted dotted; }
+
+
+.modal {
+    position: fixed; /* фиксированное положение */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5); /* цвет фона */
+    z-index: 1050;
+    opacity: 0; /* по умолчанию модальное окно прозрачно */
+    -webkit-transition: opacity 200ms ease-in; 
+    -moz-transition: opacity 200ms ease-in;
+    transition: opacity 200ms ease-in; /* анимация перехода */
+    pointer-events: none; /* элемент невидим для событий мыши */
+    margin: 0;
+    padding: 0;
+}
+/* при отображении модального окно */
+.modal:target {
+    opacity: 1; /* делаем окно видимым */
+	  pointer-events: auto; /* элемент видим для событий мыши */
+    overflow-y: auto; /* добавляем прокрутку по y, когда элемент не помещается на страницу */
+}
+/* ширина модального окна и его отступы от экрана */
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+      max-width: 500px;
+      margin: 30px auto; /* для отображения модального окна по центру */
+  }
+}
